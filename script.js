@@ -17,7 +17,7 @@ function createTiles() {
         const tile = document.createElement('div');
         tile.classList.add('tile');
         tile.textContent = image;
-        tile.addEventListener('click', debounce(handleTileClick, 400));
+        tile.addEventListener('click', handleTileClick);
         gameBoard.appendChild(tile);
     });
 }
@@ -44,6 +44,7 @@ function handleTileClick(event) {
             secondTile = null;
         } else {
             isProcessing = true;
+            disableBoard();
             setTimeout(() => {
                 firstTile.classList.remove('revealed');
                 firstTile.style.color = 'transparent';
@@ -51,24 +52,27 @@ function handleTileClick(event) {
                 secondTile.style.color = 'transparent';
                 firstTile = null;
                 secondTile = null;
+                enableBoard();
                 isProcessing = false;
             }, 1000);
         }
     }
 }
 
-function debounce(func, wait) {
-    let timeout;
-    return function () {
-        const context = this;
-        const args = arguments;
-        const later = function () {
-            timeout = null;
-            func.apply(context, args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+function disableBoard() {
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        tile.style.pointerEvents = 'none';
+    });
+}
+
+function enableBoard() {
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        if (!tile.classList.contains('revealed')) {
+            tile.style.pointerEvents = 'auto';
+        }
+    });
 }
 
 createTiles();
