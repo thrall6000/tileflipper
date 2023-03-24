@@ -16,10 +16,10 @@ body {
     height: 90px;
     background-color: #333;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    color: transparent;
-    user-select: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tile.revealed {
+    pointer-events: none;
 }
