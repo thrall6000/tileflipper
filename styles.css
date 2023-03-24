@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color: #0000ff;
 }
 
 .game-board {
@@ -18,11 +19,10 @@ body {
     cursor: pointer;
     background-size: cover;
     background-repeat: no-repeat;
-    background-blend-mode: luminosity;
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+    opacity: 0;
 }
 
 .tile.revealed {
     pointer-events: none;
-    background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 1));
+    opacity: 1;
 }
