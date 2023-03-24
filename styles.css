@@ -18,8 +18,10 @@ body {
     cursor: pointer;
     background-size: cover;
     background-repeat: no-repeat;
+    opacity: 0;
 }
 
 .tile.revealed {
     pointer-events: none;
+    opacity: 1;
 }
