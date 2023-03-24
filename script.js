@@ -1,6 +1,7 @@
 const gameBoard = document.getElementById('gameBoard');
 const images = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 let firstTile, secondTile;
+let isProcessing = false;
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -22,6 +23,8 @@ function createTiles() {
 }
 
 function handleTileClick(event) {
+    if (isProcessing) return;
+
     const tile = event.target;
 
     if (tile.classList.contains('revealed') || firstTile === tile) {
@@ -40,6 +43,7 @@ function handleTileClick(event) {
             firstTile = null;
             secondTile = null;
         } else {
+            isProcessing = true;
             setTimeout(() => {
                 firstTile.classList.remove('revealed');
                 firstTile.style.color = 'transparent';
@@ -47,6 +51,7 @@ function handleTileClick(event) {
                 secondTile.style.color = 'transparent';
                 firstTile = null;
                 secondTile = null;
+                isProcessing = false;
             }, 1000);
         }
     }
