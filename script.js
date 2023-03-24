@@ -17,7 +17,7 @@ function createTiles() {
         const tile = document.createElement('div');
         tile.classList.add('tile');
         tile.textContent = image;
-        tile.addEventListener('click', handleTileClick);
+        tile.addEventListener('click', debounce(handleTileClick, 400));
         gameBoard.appendChild(tile);
     });
 }
@@ -55,6 +55,20 @@ function handleTileClick(event) {
             }, 1000);
         }
     }
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        const later = function () {
+            timeout = null;
+            func.apply(context, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 createTiles();
